@@ -1,6 +1,20 @@
 #!/bin/env python
 import os
-from CRABClient.UserUtilities import config
+try:
+    from CRABClient.UserUtilities import config
+except ImportError:
+    print
+    print(
+        "ERROR: Could not load CRABClient.UserUtilities.  Please source the crab3 setup:"
+    )
+    print("source /cvmfs/cms.cern.ch/crab3/crab.sh")
+    exit(-1)
+try:
+    cmsswBaseDir = os.environ["CMSSW_BASE"]
+except KeyError as e:
+    print("Could not find CMSSW_BASE env var; have you set up the CMSSW environment?")
+    exit(-1)
+
 from CRABAPI.RawCommand import crabCommand
 from CRABClient.ClientExceptions import ClientException
 from httplib import HTTPException
