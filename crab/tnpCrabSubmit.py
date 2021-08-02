@@ -89,7 +89,7 @@ def submit(config, requestName, sample, era, json, extraParam=[]):
     )
     config.Data.splitting = "FileBased" if isMC else "LumiBased"
     config.Data.lumiMask = None if isMC else json
-    config.Data.unitsPerJob = 5 if isMC else 25
+    config.Data.unitsPerJob = 5 if isMC else 50
     config.JobType.pyCfgParams = (
         defaultArgs
         + ["isMC=True" if isMC else "isMC=False", "era=%s" % era]
@@ -141,61 +141,44 @@ def submitWrapper(requestName, sample, era, extraParam=[]):
 
 #
 # List of samples to submit, with eras
-# Here the default data/MC for UL and rereco are given (taken based on the release environment)
-# If you would switch to AOD, don't forget to add 'isAOD=True' to the defaultArgs!
-#
-# era = "UL2017"
-# submitWrapper(
-#     "Run2017B", "FIXME", era
-# )
-# submitWrapper(
-#     "Run2017C", "FIXME", era
-# )
-# submitWrapper(
-#     "Run2017D", "FIXME", era
-# )
-# submitWrapper(
-#     "Run2017E", "FIXME", era
-# )
-# submitWrapper(
-#     "Run2017F", "FIXME", era
-# )
-
-# submitWrapper(
-#     "DY_NLO",
-#     "FIXME",
-#     era,
-# )
-# submitWrapper(
-#     "DY_LO",
-#     "FIXME",
-#     era,
-# )
+era = "UL2017"
+# Data
+submitWrapper(
+    "Run2017B", "/SingleElectron/Run2017B-UL2017_MiniAODv2-v1/MINIAOD", era
+)
+submitWrapper(
+    "Run2017C", "/SingleElectron/Run2017C-UL2017_MiniAODv2-v1/MINIAOD", era
+)
+submitWrapper(
+    "Run2017D", "/SingleElectron/Run2017D-UL2017_MiniAODv2-v1/MINIAOD", era
+)
+submitWrapper(
+    "Run2017E", "/SingleElectron/Run2017E-UL2017_MiniAODv2-v1/MINIAOD", era
+)
+submitWrapper(
+    "Run2017F", "/SingleElectron/Run2017F-UL2017_MiniAODv2-v1/MINIAOD", era
+)
+# MC
+submitWrapper(
+    "DY_LO",
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2/MINIAODSIM",
+    era,
+)
+submitWrapper(
+    "DY_LO_ext",
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9_ext1-v1/MINIAODSIM",
+    era,
+)
 
 # era = "UL2018"
+# # Data
 # submitWrapper("Run2018A", "/EGamma/Run2018A-UL2018_MiniAODv2-v1/MINIAOD", era)
 # submitWrapper("Run2018B", "/EGamma/Run2018B-UL2018_MiniAODv2-v1/MINIAOD", era)
 # submitWrapper("Run2018C", "/EGamma/Run2018C-UL2018_MiniAODv2-v1/MINIAOD", era)
 # submitWrapper("Run2018D", "/EGamma/Run2018D-UL2018_MiniAODv2-v1/MINIAOD", era)
-
-# submitWrapper(
-#     "DY_NLO",
-#     "FIXME",
-#     era,
-# )
+# # MC
 # submitWrapper(
 #     "DY_LO",
-#     "FIXME",
+#     "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2/MINIAODSIM",
 #     era,
 # )
-
-# test
-era = "UL2018"
-# /EGamma/Run2018*-UL2018_MiniAODv2-*/MINIAOD
-submitWrapper("Run2018A", "/EGamma/Run2018A-UL2018_MiniAODv2-v1/MINIAOD", era)
-# MC
-submitWrapper(
-    "DY_LO",
-    "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2/MINIAODSIM",
-    era,
-)
